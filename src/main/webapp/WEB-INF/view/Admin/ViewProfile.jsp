@@ -20,6 +20,7 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<link rel="stylesheet" href="http://localhost:8080/AdminProfileResources/style.css">
 </head>
 <body>
     <div class="sidebar">
@@ -85,7 +86,35 @@
         </ul>
     </div>
     <section class="home-section">
+    	<div class="user">
+    <header class="user__header">
+        <img src="https://img.icons8.com/external-others-phat-plus/64/000000/external-admin-marketing-seo-outline-others-phat-plus.png"/>
+        <h6 class="user__title"><h1>Admin Profile</h1></h6>
+    </header>
     
+    <form class="form">
+        <div class="form__group">
+            <input type="text" placeholder="AdminName" class="form__input" readonly />
+        </div>
+
+        <form class="form">
+            <div class="form__group">
+                <input type="text" placeholder="ConatactNumber" class="form__input" readonly/>
+            </div>
+
+            <form class="form">
+                <div class="form__group">
+                    <input type="text" placeholder="UserName" class="form__input" readonly/>
+                </div>
+        
+        <div class="form__group">
+            <input type="email" placeholder="EmailId" class="form__input" readonly/>
+        </div>
+        
+        <button class="btn" type="button">Update Profile</button><br>
+        <button class="btn" type="button">Change Password</button>
+    </form>
+</div>
     </section>
     <!-- <script>
         let sidebar = document.querySelector(".sidebar");
@@ -98,7 +127,7 @@
                 sidebarBtn.classList.replace("bx-menu-alt-right", "bx-menu");
         }
     </script> -->
-<div></div>
+<script  src="http://localhost:8080/AdminProfileResources/script.js"></script>
 </body>
 
 </html>

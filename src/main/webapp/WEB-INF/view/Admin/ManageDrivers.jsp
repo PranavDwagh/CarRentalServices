@@ -219,7 +219,7 @@
         	<div class="modal-dialog" role="document">
       			<div class="modal-content">
             			<div class="modal-header">
-              				<h5 class="modal-title">Add Car</h5>
+              				<h5 class="modal-title">Add Driver</h5>
               				<button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     			<span aria-hidden="true">&times;</span>
               				</button>
@@ -253,7 +253,7 @@
       					</select>
     				</div>
     				<div class="modal-footer">
-      					<a  type="button" class="btn btn-primary" onclick = "addDriverDetails()">Add Car</a>
+      					<a  type="button" class="btn btn-primary" onclick = "addDriverDetails()">Add Driver</a>
       					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     				</div>
   				</div>

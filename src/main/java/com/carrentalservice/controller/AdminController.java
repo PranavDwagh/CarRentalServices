@@ -51,13 +51,13 @@ public class AdminController {
 	
 	@GetMapping("/")
 	public ModelAndView loadAdminLogin() {
-			return new ModelAndView("CustomerView/ListCars");
+			return new ModelAndView("Admin/index");
 	} // end of hello()
 	
 	@PostMapping("/adminLogin/{username}/{password}")
 	public ModelAndView adminLogin(@PathVariable String username, @PathVariable String password) {
 			ModelAndView  temp = new ModelAndView();
-			temp.setViewName("Admin_Dashboard");
+			temp.setViewName("Admin/Admin_Dashboard");
 			return temp;
 	} // end of adminLogin
 	
@@ -67,7 +67,7 @@ public class AdminController {
 		adminModelAndView.addObject("carsCount", vehicleRepo.getCarsCount());
 		adminModelAndView.addObject("driversCount", driverRepo.getDriverCount());
 		adminModelAndView.addObject("customersCount", customerRepo.getCustomerCount());
-		adminModelAndView.setViewName("Admin_Dashboard");
+		adminModelAndView.setViewName("Admin/Admin_Dashboard");
 		return adminModelAndView;
 	} // end of
 
@@ -128,7 +128,7 @@ public class AdminController {
 		ModelAndView vehicleModelAndView = new ModelAndView();
 		List<Vehicle> vehicleList = vehicleRepo.findAll();
 		vehicleModelAndView.addObject("vehicleDetails", vehicleList);
-		vehicleModelAndView.setViewName("ManageCars");
+		vehicleModelAndView.setViewName("Admin/ManageCars");
 		return vehicleModelAndView;
 	} // end of loadManageCars;
 
@@ -141,7 +141,7 @@ public class AdminController {
 	public ModelAndView loadManageDrivers() {
 		ModelAndView driversModelAndView = new ModelAndView();
 		driversModelAndView.addObject("driverDetails", driverRepo.findAll());
-		driversModelAndView.setViewName("ManageDrivers");
+		driversModelAndView.setViewName("Admin/ManageDrivers");
 		return driversModelAndView;
 	} // end of loadManageDrivers;
 
@@ -152,29 +152,29 @@ public class AdminController {
 
 	@GetMapping("/loadViewBookings")
 	public String loadViewBookings() {
-		return "ViewBookings";
+		return "Admin/ViewBookings";
 	} // end of loadUserFeedback
 
 	@GetMapping("/loadViewCustomers")
 	public ModelAndView loadViewCustomers() {
 		ModelAndView customersModelAndView = new ModelAndView();
 		customersModelAndView.addObject("customerData", customerRepo.findAll());
-		customersModelAndView.setViewName("ViewCustomers");
+		customersModelAndView.setViewName("Admin/ViewCustomers");
 		return customersModelAndView;
 	} // end of loadUserFeedback
 
 	@GetMapping("/loadViewPayments")
 	public String loadViewPayments() {
-		return "ViewPayment";
+		return "Admin/ViewPayment";
 	} // end of loadUserFeedback
 
 	@GetMapping("/loadViewProfile")
 	public String loadViewProfile() {
-		return "ViewProfile";
+		return "Admin/ViewProfile";
 	} // end of loadUserFeedback
 
 	@GetMapping("/logout")
 		public String logout(@RequestBody Admin admin) {
-			return "index";
+			return "Admin/index";
 		}
 } // end of AdminController

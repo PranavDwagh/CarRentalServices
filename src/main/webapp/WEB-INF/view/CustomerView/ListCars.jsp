@@ -23,7 +23,7 @@
 	<script src = "http://localhost:8080/js/Jquery-3.0.6.js"></script>
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="http://localhost:8080/CustomerResources/css/style.css">
-<!-- 	<script>
+<script>
 	$(document).ready(()=>{
 		$.ajax({
 			url : `vehicleController/getAllVehicles`,
@@ -40,7 +40,7 @@
 		})
 	})
 	
-	</script> -->
+	</script>
   </head>
 
   <body style="background-image: linear-gradient(to right,rgb(0, 0, 0),rgba(47, 110, 153, 0.267)) , url(images/supercar22.jpg) ;"  data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
@@ -90,7 +90,6 @@
         </div>
       </header>
        <div style="align-self: center; padding-top: 10%; padding-left: 5%;">
-       <%List<Vehicle> vehicleList = (List<Vehicle>)response.getAttribute("carsList");%>
        <div id="displayCars">
        
        </div>
