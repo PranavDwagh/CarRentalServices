@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.sql.Blob"%>
 <%@page import="java.util.List"%>
 <%@page import="com.carrentalservice.entity.Vehicle"%>
 <html lang="en" dir="ltr">
@@ -122,6 +124,7 @@ function updateCarPrice(){
         <div class = "container">
             <h3 style = "text-align:center;">Manage Cars</h3>
            	<% List<Vehicle> vehicleList = (List<Vehicle>) request.getAttribute("vehicleDetails");%>
+           	
              <table class = "table table-bordered" >
              	<tr>
              		<th>Vehicle Name</th>
@@ -134,6 +137,16 @@ function updateCarPrice(){
              	</tr>
              	<%for(Vehicle vehicle : vehicleList) {%>
              		<tr>
+             		<%-- <td><img src="<%Blob image = vehicle.getVehicle_image();
+             					byte[] imgData = image.getBytes(1,(int) image.length());
+             					response.setContentType("image/gif");
+             					OutputStream o = response.getOutputStream();
+             					o.write(imgData);
+             					o.flush();
+             					o.close();
+             					   %>">
+             		</td> --%>
+             		<td><img src=<%=vehicle.getVehicle_image() %>></td>
              		<td><%=vehicle.getVehicle_name() %></td>
              		<td><%=vehicle.getVehicle_brand_name() %></td>
              		<td><%=vehicle.getVehicle_fuel_type() %></td>
@@ -176,32 +189,32 @@ function updateCarPrice(){
               				</button>
     					</div>
     				<div class="modal-body">
-    					<form action = "add" type = "POST" enctype="multipart/form-data">
-	      					<input type="text" class="text-primary" placeholder="Enter Vehicle Name" id="vehicleName">
-	      					<input type="text" class="text-primary" placeholder="Enter Vehicle Brand Name" id="vehicleBrandName">
-	      					<select id="vehicleType">
+    					<form action = "/addCar" method = "post" enctype="multipart/form-data">
+	      					<input type="text" class="text-primary" placeholder="Enter Vehicle Name" id="vehicleName" name="vehicleName">
+	      					<input type="text" class="text-primary" placeholder="Enter Vehicle Brand Name" id="vehicleBrandName" name="vehicleBrandName">
+	      					<select id="vehicleType" name="vehicleType">
 	      						<option>Select Vehicle Type</option>
 	      						<option id = "Crossover">Crossover</option>
 	      						<option id = "HatchBack">Hatch-back</option>
 	      						<option id = "SUV">SUV</option>
 	      						<option id = "Sedan">Sedan</option>
 	      					</select>
-	      					<input type="text" class="text-primary" placeholder="Enter Seating Capacity" id="seatingCapacity">
-	      					<input type="text" class="text-primary" placeholder="Enter the Price (per km)" id="pricePerKm">
-	      					<select id="vehicleFuelType">
+	      					<input type="text" class="text-primary" placeholder="Enter Seating Capacity" id="seatingCapacity" name="seatingCapacity">
+	      					<input type="text" class="text-primary" placeholder="Enter the Price (per km)" id="pricePerKm" name="pricePerKm">
+	      					<select id="vehicleFuelType" name="vehicleFuelType">
 	      						<option>Select Vehicle Fuel Type</option>
 	      						<option id = "CNG">CNG</option>
 	      						<option id = "Petrol">Petrol</option>
 	      						<option id = "Diesel">Diesel</option>
 	      						<option id = "Electric">Electric</option>
 	      					</select>
-	      					<input type="file" id="vehicleImage" accept="image/png, image/jpeg">
-      					</form>
+	      					<input type="file" id="vehicleImage" accept="image/png, image/jpeg" name="vehicleImage">
     				</div>
     				<div class="modal-footer">
-      					<a href = "http://localhost:8080/loadManageCars" type="submit" class="btn btn-primary" onclick = "addCarDetails()">Add Car</a>
+      					<button type="submit" class="btn btn-primary" >Add Car</button>
       					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     				</div>
+    				</form>
   				</div>
 			</div>
 		</div>

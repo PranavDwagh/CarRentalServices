@@ -35,6 +35,7 @@ public class VehicleController {
 	@PostMapping("/add")
 	public void addVehicle(@RequestBody Vehicle obj)
 	{
+		System.out.println(obj);
 		dao.addVehicle(obj);
 	}
 	

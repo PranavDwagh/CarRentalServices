@@ -25,7 +25,7 @@ public class Vehicle {
 	private String vehicle_fuel_type;
 	@Column(name="vehicle_status")
 	private int vehicle_status;
-	@Column
+	@Column (columnDefinition = "LONGBLOB")
 	@Lob
 	private Blob vehicle_image;
 	

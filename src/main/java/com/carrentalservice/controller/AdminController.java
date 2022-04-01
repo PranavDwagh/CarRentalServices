@@ -3,6 +3,7 @@ package com.carrentalservice.controller;
 import java.io.IOException;
 import java.sql.Blob;
 import java.sql.SQLException;
+import java.util.Base64;
 import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
@@ -15,6 +16,7 @@ import javax.sql.rowset.serial.SerialException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -34,6 +36,7 @@ import com.carrentalservice.entity.Booking;
 import com.carrentalservice.entity.Driver;
 import com.carrentalservice.entity.RecentBookings;
 import com.carrentalservice.entity.Vehicle;
+
 
 @org.springframework.stereotype.Controller
 
@@ -92,17 +95,34 @@ public class AdminController {
 		vehicleRepo.save(vehicle);
 	}
 
-	 @PostMapping("/addCar/{vehicleName}/{vehicleBrandName}/{vehicleType}/{seatingCapacity}/{pricePerKm}/{vehicleFuelType}/{vehicleImage}")
-	  public void addCar(@PathVariable String vehicleName, @PathVariable String vehicleBrandName, @PathVariable String vehicleType, @PathVariable int seatingCapacity, @PathVariable int pricePerKm, @PathVariable String vehicleFuelType, @PathVariable MultipartFile vehicleImage) throws IOException, SerialException, SQLException 
-	 { 
-		byte[] byteArr;
-		Blob blob;
-		byteArr = vehicleImage.getBytes();
-		blob = new SerialBlob(byteArr);
-	    Vehicle vehicle = new Vehicle(vehicleName, vehicleBrandName, vehicleType, seatingCapacity, pricePerKm, vehicleFuelType, blob);
-	    vehicleRepo.save(vehicle); 
-	 } //end of addCar;
+//	 @PostMapping("/addCar/{vehicleName}/{vehicleBrandName}/{vehicleType}/{seatingCapacity}/{pricePerKm}/{vehicleFuelType}/{vehicleImage}")
+//	  public void addCar(@PathVariable String vehicleName, @PathVariable String vehicleBrandName, @PathVariable String vehicleType, @PathVariable int seatingCapacity, @PathVariable int pricePerKm, @PathVariable String vehicleFuelType, @PathVariable MultipartFile vehicleImage) throws IOException, SerialException, SQLException 
+//	 { 
+//		String fileName = StringUtils.cleanPath(vehicleImage.getOriginalFilename());
+//	    Vehicle vehicle = new Vehicle(vehicleName, vehicleBrandName, vehicleType, seatingCapacity, pricePerKm, vehicleFuelType, Base64.getEncoder().encodeToString(vehicleImage.getBytes()));
+//	    vehicleRepo.save(vehicle); 
+//	 } //end of addCar;
 	 
+	
+	 @PostMapping("/addCar") 
+	 public void addCar(@RequestParam("vehicleName")
+	 String vehicleName, @RequestParam("vehicleBrandName") String
+	 vehicleBrandName, @RequestParam("vehicleType") String
+	 vehicleType, @RequestParam("seatingCapacity") int
+	 seatingCapacity, @RequestParam("pricePerKm") int
+	 pricePerKm, @RequestParam("vehicleFuelType") String
+	 vehicleFuelType, @RequestParam("vehicleImage") MultipartFile vehicleImage)
+	 throws IOException, SerialException, SQLException {
+		 byte[] byteArr;
+		 Blob blob;
+		 byteArr = vehicleImage.getBytes();
+		 blob = new SerialBlob(byteArr);
+	 System.out.println("In Controller"); 
+	 System.out.println(vehicleName + vehicleBrandName + vehicleType + seatingCapacity + pricePerKm + vehicleFuelType + Base64.getEncoder().encodeToString(vehicleImage.getBytes())); String fileName = StringUtils.cleanPath(vehicleImage.getOriginalFilename()); 
+	 Vehicle vehicle= new Vehicle(vehicleName, vehicleBrandName, vehicleType, seatingCapacity, pricePerKm, vehicleFuelType, blob);
+	 System.out.println(vehicle); 
+	 vehicleRepo.save(vehicle); } //end of addCar;
+	 	
 	@PostMapping("/addDriver/{driverFirstName}/{driverLastName}/{driverContactNumber}/{driverAvail}/{driverLicenseNumber}/{driverCity}/{driverPinCode}/{driverState}")
 	public void addDriver(@PathVariable String driverFirstName, @PathVariable String driverLastName,
 			@PathVariable int driverAvail, @PathVariable String driverContactNumber,

@@ -120,7 +120,7 @@ function deleteCustomerById(customerId){
 		        	<td><%=customers.getCity() %></td>
 		        	<td><%=customers.getPincode() %></td>
 		        	<td><%=customers.getState() %></td>
-		        	<td><button class = "btn btn-danger" onclick = "deleteCustomerById(<%=customers.getId()%>)">Delete</button></td>
+		        	<td><a href="http://localhost:8080/loadViewCustomers" class = "btn btn-danger" onclick = "deleteCustomerById(<%=customers.getId()%>)">Delete</a></td>
 	        	</tr>
         	<%} %>
         </table>
