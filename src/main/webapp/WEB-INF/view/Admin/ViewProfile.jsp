@@ -21,6 +21,21 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <link rel="stylesheet" href="http://localhost:8080/AdminProfileResources/style.css">
+<script>
+$(document).ready(()=>{
+	$.ajax({
+		url : `/admin/getAdminProfile`,
+		type: "GET",
+		success : function(adminProfile){
+			console.log(adminProfile);
+			$("#AdminName").val(adminProfile.firstname +" "+ adminProfile.lastname);
+			$("#ContactNumber").val(adminProfile.contactNumber);
+			$("#UserName").val(adminProfile.username);
+		}
+	})
+})
+
+</script>
 </head>
 <body>
     <div class="sidebar">
@@ -94,25 +109,20 @@
     
     <form class="form">
         <div class="form__group">
-            <input type="text" placeholder="AdminName" class="form__input" readonly />
+            <input type="text" placeholder="AdminName" class="form__input" readonly id="AdminName" />
         </div>
 
         <form class="form">
             <div class="form__group">
-                <input type="text" placeholder="ConatactNumber" class="form__input" readonly/>
+                <input type="text" placeholder="ContactNumber" class="form__input" readonly id="ContactNumber"/>
             </div>
 
             <form class="form">
                 <div class="form__group">
-                    <input type="text" placeholder="UserName" class="form__input" readonly/>
-                </div>
-        
-        <div class="form__group">
-            <input type="email" placeholder="EmailId" class="form__input" readonly/>
-        </div>
-        
-        <button class="btn" type="button">Update Profile</button><br>
-        <button class="btn" type="button">Change Password</button>
+                    <input type="text" placeholder="UserName" class="form__input" readonly id="UserName"/>
+                </div>   
+        <!-- <button class="btn" type="button">Update Profile</button><br>
+        <button class="btn" type="button">Change Password</button> -->
     </form>
 </div>
     </section>

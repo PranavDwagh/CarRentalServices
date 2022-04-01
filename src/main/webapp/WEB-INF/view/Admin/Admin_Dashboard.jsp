@@ -23,6 +23,17 @@
 	<!-- Latest compiled and minified JavaScript -->
 	<script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 	<script>
+	$(document).ready(()=>{
+		$.ajax({
+			url : `/admin/getAdminName`,
+			type : "GET",
+			success : function(adminName){
+				console.log(adminName);
+				$("#adminName").text(adminName);
+			}
+		})
+		console.log(addAdminURL);	
+	})
 	/* below function to add new admin */
 	function addAdminDetails(){
 		$(document).ready(()=>{
@@ -109,7 +120,7 @@
         <nav>
             <div class="profile-details">
                 <!--<img src="images/profile.jpg" alt="">-->
-                <span class="admin_name" id="adminName"> </span>
+                <span class="admin_name" id="adminName">Logged In as :  </span>
             </div>
             <buttoon class="btn btn-primary" data-toggle="modal" data-target="#addNewAdmin">Add a new Admin</button>
         </nav>

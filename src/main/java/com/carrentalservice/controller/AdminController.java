@@ -75,6 +75,7 @@ public class AdminController {
 	} // end of
 
 	
+	
 	@PostMapping("/addAdmin/{adminFirstName}/{adminLastName}/{adminContactNumber}/{adminUserName}/{adminPassword}")
 	public void addAdmin(@PathVariable String adminFirstName, @PathVariable String adminLastName,
 			@PathVariable String adminContactNumber, @PathVariable String adminUserName,
@@ -185,7 +186,7 @@ public class AdminController {
 
 	@GetMapping("/loadViewPayments")
 	public String loadViewPayments() {
-		return "Admin/ViewPayment";
+		return "/Admin/ViewPayment";
 	} // end of loadUserFeedback
 
 	@GetMapping("/loadViewProfile")

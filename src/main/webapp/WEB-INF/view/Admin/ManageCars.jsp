@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 <!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<%@page import="java.io.ByteArrayInputStream"%>
+<%@page import="javax.imageio.ImageIO"%>
+<%@page import="java.awt.image.BufferedImage"%>
+<%@page import="org.hibernate.internal.build.AllowSysOut"%>
+<%@page import="java.util.Base64"%>
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.sql.Blob"%>
 <%@page import="java.util.List"%>
@@ -29,7 +34,7 @@ function deleteVehicle(vehicleId){
 		url : vehicleIdURL,
 		type : "POST",
 		success : function(){
-			window.location.reload();
+			window.open("http://localhost:8080/loadManageCars","_self");
 		}
 	})	
 } //end of function updateVehicle();
@@ -55,6 +60,7 @@ function updateCarPrice(){
 		})	
 	})
 }
+
 </script>
 </head>
 <body style="overflow-x:hidden;">
@@ -127,6 +133,7 @@ function updateCarPrice(){
            	
              <table class = "table table-bordered" >
              	<tr>
+             		<th>Vehicle Image</th>
              		<th>Vehicle Name</th>
              		<th>Vehicle Brand Name</th>
              		<th>Vehicle Type</th>
@@ -136,23 +143,27 @@ function updateCarPrice(){
              		<td><button type = "button" class = "btn btn-primary" data-toggle="modal" data-target="#addCar">Add Car</button>    <a href = "http://localhost:8080/loadManageCars" class = "btn btn-warning">Refresh</a></td>
              	</tr>
              	<%for(Vehicle vehicle : vehicleList) {%>
-             		<tr>
-             		<%-- <td><img src="<%Blob image = vehicle.getVehicle_image();
-             					byte[] imgData = image.getBytes(1,(int) image.length());
-             					response.setContentType("image/gif");
-             					OutputStream o = response.getOutputStream();
-             					o.write(imgData);
-             					o.flush();
-             					o.close();
-             					   %>">
-             		</td> --%>
-             		<td><img src=<%=vehicle.getVehicle_image() %>></td>
+	           	<%
+          					Blob image = null;
+          					byte[] imgData = null;
+          					image = vehicle.getVehicle_image();
+          					imgData = image.getBytes(0, (int)image.length());
+          					BufferedImage img = ImageIO.read(new ByteArrayInputStream(imgData));
+          					 /* response.setContentType("image/jpeg");
+          					 OutputStream o = response.getOutputStream();
+          					o.write(imgData);
+          					o.flush();
+          					o.close(); */
+	           			%>
+	           			
+             		<tr>		
+             		<td><img src = "<%=img %>" alt = "<%=vehicle.getVehicle_name()%>" st ></td>
              		<td><%=vehicle.getVehicle_name() %></td>
              		<td><%=vehicle.getVehicle_brand_name() %></td>
-             		<td><%=vehicle.getVehicle_fuel_type() %></td>
+             		<td><%=vehicle.getVehicle_type() %></td>
              		<td><%=vehicle.getVehicle_seating_capacity() %></td>
              		<td><%=vehicle.getVehicle_price_per_km()%></td>
-             		<td><%=vehicle.getVehicle_type() %></td>
+             		<td><%=vehicle.getVehicle_fuel_type() %></td>
              		<td><button class = "btn btn-success" onclick = temp(<%=vehicle.getVehicle_id() %>) data-toggle = "modal" data-target="#updatePrice">Update Price</button>    <a href="http://localhost:8080/loadManageCars" class = "btn btn-danger" onclick = deleteVehicle(<%=vehicle.getVehicle_id() %>)>Delete</a></td>
              	</tr>
              	<%} %>
