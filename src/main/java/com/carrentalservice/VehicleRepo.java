@@ -1,5 +1,6 @@
 package com.carrentalservice;
 
+import java.sql.Blob;
 import java.util.List;
 
 import org.hibernate.annotations.SQLUpdate;
@@ -24,4 +25,9 @@ public interface VehicleRepo extends JpaRepository<Vehicle, Integer>{
 	@Query(value = "select * from vehicle where vehicle_status =1", nativeQuery = true)
 	public List<Vehicle> getAvaibleVehicle();
 	
+	@Query(value = "SELECT VEHICLE_IMAGE FROM vehicle vehicle where vehicle.vehicle_id=:vehicleId", nativeQuery = true)
+	public Blob getVehicleImage(@Param("vehicleId") int vehicleId); 
+	
+	@Query(value="select vehicle_price_per_km from vehicle where vehicle_id =:id ", nativeQuery = true)
+	public int getRate(@Param("id")int id);
 }

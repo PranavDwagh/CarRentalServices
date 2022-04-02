@@ -1,0 +1,482 @@
+<!doctype html>
+<html lang="en">
+
+  <head>
+    <title>CarOnDemand &mdash; Free Website Template by Colorlib</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link href="https://fonts.googleapis.com/css?family=DM+Sans:300,400,700&display=swap" rel="stylesheet">
+
+    <link rel="stylesheet" href="fonts/icomoon/style.css">
+
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap-datepicker.css">
+    <link rel="stylesheet" href="css/jquery.fancybox.min.css">
+    <link rel="stylesheet" href="css/owl.carousel.min.css">
+    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" href="css/aos.css">
+
+    <!-- MAIN CSS -->
+    <link rel="stylesheet" href="css/style.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script>
+     function check()
+      {
+        console.log("in check");
+        var oldpassword = $("#oldpassword").val();
+        var newpassword = $("#newpassword").val();
+        const button = document.getElementById("changepassword");
+        console.log(oldpassword);
+        console.log(newpassword);
+        if(oldpassword==newpassword )
+        {
+            document.getElementById("cmsg").style.display="block";
+            button.disabled = true;
+        }
+        else
+        {
+          document.getElementById("cmsg").style.display="none";
+            button.disabled = false;
+        }
+      }
+  </script>
+  <script>
+    
+    $(document).ready(()=>{
+      
+      $.ajax({
+        url:"/carrentalservices/getbyid",
+        type:"GET",
+        success:(data)=>{
+          
+          console.log(data);
+          $("#head").text(data.firstname);
+          $("#pusername").text(data.username);
+          $("#pfirstname").text(data.firstname);
+          $("#plastname").text(data.lastname);
+          $("#pcontactnumber").text(data.contactNo);
+          $("#pemail").text(data.email);
+          $("#pcity").text(data.city);
+          $("#ppincode").text(data.pincode);
+          $("#pstate").text(data.state);
+        }
+      })
+      
+      $("#update").click(()=>{
+        var firstname = $("#firstname").val();
+        var lastname = $("#lastname").val();
+        var contact_number=$("#contactnumber").val();
+        var username = $("#username").val();
+        var email = $("#email").val();
+        var city = $("#city").val(); 
+        var pincode = $("#pincode").val();
+        var state = $("#state").val();
+        var password = $("#spassword").val();
+        var confirmPassword = $("#npassword").val();
+        
+        data =  {
+          "firstname": firstname,
+          "lastname": lastname,
+          "contactNo": contact_number,
+          "email": email,
+          "city": city,
+          "pincode": pincode,
+          "state": state
+        }
+        console.log(data);
+        $.ajax({
+          url:`/carrentalservices/update`,
+          type:"POST",
+          data:JSON.stringify(data),
+          beforeSend:function(req, setting)
+          {
+            req.setRequestHeader("Content-Type", "application/json")
+          },
+          success:function(data)
+          {
+            console.log(data)
+          }
+        })
+      })
+
+      $("#changepassword").click(()=>{
+
+        var oldpassword = $("#oldpassword").val();
+        var newpassword = $("#newpassword").val();
+
+          $.ajax({
+            url:`/carrentalservices/changepassword/${oldpassword}/${newpassword}`,
+            type:"Post",
+            success:(data)=>{
+                if(data==true)
+                {
+                    $("#spass").show();
+                }
+
+            }
+          })
+      })
+    })
+    
+  </script>
+
+  </head>
+
+  <body style="background-image: linear-gradient(to right,rgb(0, 0, 0),rgba(47, 110, 153, 0.267)) , url(images/supercar22.jpg) ;"  data-spy="scroll" data-target=".site-navbar-target" data-offset="300">
+
+    
+    <div class="site-wrap" id="home-section">
+
+      <div class="site-mobile-menu site-navbar-target">
+        <div class="site-mobile-menu-header">
+          <div class="site-mobile-menu-close mt-3">
+            <span class="icon-close2 js-menu-toggle"></span>
+          </div>
+        </div>
+        <div class="site-mobile-menu-body"></div>
+      </div>
+
+
+
+      <header class="site-navbar site-navbar-target" role="banner">
+
+        <div class="container">
+          <div class="row align-items-center position-relative">
+            
+            <div class="col-3 ">
+              <div class="site-logo">
+                <a href="index.html">CarRent</a>
+              </div>
+            </div>
+            
+            <div class="col-9  text-right">
+              
+              
+              <span class="d-inline-block d-lg-none"><a href="#" class="text-white site-menu-toggle js-menu-toggle py-5 text-white"><span class="icon-menu h3 text-white"></span></a></span>
+              
+              <nav class="site-navigation text-right ml-auto d-none d-lg-block" role="navigation">
+                <ul class="site-menu main-menu js-clone-nav ml-auto ">
+                  <li class="active font-size-18"><a href="index.html" class="nav-link">Home</a></li>
+                  <li><a class="font-size-18" href="services.html" class="nav-link">Profile</a></li>
+                  <li><a class="font-size-18" href="about.html" class="nav-link">Ride History</a></li>
+                  <li><a  class="font-size-18" href="http://localhost:8080" class="nav-link">Log Out</a></li>
+                  <!-- <li><a href="contact.html" class="nav-link">Contact</a></li> -->
+                </ul>
+              </nav>
+            </div>
+            
+            
+          </div>
+        </div>
+
+
+
+      </header>
+
+ 
+        <div class="container-fluid" >
+        <div class="row">
+          <div class="col-md-6 ml-auto mr-auto" style="padding-top: 10%;">
+
+          <!--Enter Bootstrap here-->
+          <!-- <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+          <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
+          <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script> -->
+          <!------ Include the above in your HEAD tag ---------->
+          
+          <div class="container emp-profile">
+                      <form method="post">
+                          <div class="row">
+                              <div class="col-md-4">
+                                  <div class="profile-img">
+                                      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS52y5aInsxSm31CvHOFHWujqUx_wWTS9iM6s7BAm21oEN_RiGoog" alt=""/>
+                                      <div class="file btn btn-lg btn-primary">
+                                          Change Photo
+                                          <input type="file" name="file"/>
+                                      </div>
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="profile-head">
+                                    <h5 id="head">Not Available
+                    
+                                    </h5>
+                                      <ul class="nav nav-tabs" id="myTab" role="tablist">
+                                          <li class="nav-item">
+                                             
+                                          </li>
+                                          
+                                      </ul>
+                                  </div>
+                              </div>
+                              
+                          
+                              <div class="col-md-8">
+                                  <div class="tab-content profile-tab" id="myTabContent">
+                                      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                                 
+                                        
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                            <label>Username</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <p id="pusername">Not Available</p>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                            <label>First Name</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <p id="pfirstname">Not Available</p>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                            <label>Last Name</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <p id="plastname">Not Available</p>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                            <label>Contact Number</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <p id="pcontactnumber">Not Available</p>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                            <label>Email</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <p id="pemail">Not Available</p>
+                                          </div>
+                                        </div>
+                                        
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                            <label>City</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <p id="pcity">Not Available</p>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                            <label>Pincode</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <p id="ppincode">Not Available</p>
+                                          </div>
+                                        </div>
+                                        <div class="row">
+                                          <div class="col-md-6">
+                                            <label>State</label>
+                                          </div>
+                                          <div class="col-md-6">
+                                            <p id="pstate">Not Available</p>
+                                          </div>
+                                        </div>
+                                              <div class="row">
+                                              <div class="col-md-12">
+                                                <table>
+                                                  <tr>
+                                                    <td>
+                                                <button type="button"  class="btn btn-outline-primary btn-group-sm" data-toggle="modal" data-target="#myModal">Update Profile</button>
+                                                  </td>
+                                                  <td>
+                                                <button type="button"  class="btn btn-outline-primary btn-group-sm" data-toggle="modal" data-target="#myModal1">Change Password</button>
+                                                </td>   
+                                               </tr>  
+                                              </table>
+                                            </div>
+                                            <p id="spass" style="display: none;">Password changed successfully</p>
+                                          </div>
+                                        </div>
+                                      </div>
+                                  </div>
+                              </div>
+                          </div>
+                      </form>           
+                  </div>
+                </div>
+              </div>
+
+        </div>
+        </div>
+
+
+        
+
+<div class="container">
+  
+  <div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          
+        </div>
+        <div class="modal-body">
+            
+          <form class="signup-form">
+            
+            <h2 class="text-center" ><b>Update Profile</b></h2>
+            
+            <hr>
+            
+            <div class="form-group">
+              
+              <input id="firstname" type="text" class="form-control" placeholder=" Enter Your First Name" required="required">
+              
+            </div>
+            
+            <div class="form-group">
+              
+              <input id="lastname" type="text" class="form-control" placeholder=" Enter Your Last Name" required="required">
+              
+            </div>
+            
+            
+            <div class="form-group">
+              
+              <input id="contactnumber" type="number" class="form-control" placeholder=" Enter Your Contact Number" required="required">
+              
+            </div>
+            
+            
+            
+            <div class="form-group">
+              
+              <input id="email" type="email" class="form-control" placeholder=" Enter Your Email Address" required="required">
+              
+            </div>
+            
+            <div class="form-group">
+              
+              <input id="city" type="text" class="form-control" placeholder=" Enter Your City" required="required">
+              
+            </div>
+            
+            <div class="form-group">
+              
+              <input id="pincode" type="number" class="form-control" placeholder=" Enter Your PinCode" required="required">
+              
+            </div>
+            
+            <div class="form-group" >
+              
+              <select style="height: 40px;" class="form-control" id="state" name="country-state">
+                
+                <option value="AN">Andaman and Nicobar Islands</option>
+                <option value="AP">Andhra Pradesh</option>
+                <option value="AR">Arunachal Pradesh</option>
+                <option value="AS">Assam</option>
+                <option value="BR">Bihar</option>
+                <option value="CH">Chandigarh</option>
+                <option value="CT">Chhattisgarh</option>
+                <option value="DN">Dadra and Nagar Haveli</option>
+                <option value="DD">Daman and Diu</option>
+                <option value="DL">Delhi</option>
+                <option value="GA">Goa</option>
+                <option value="GJ">Gujarat</option>
+                <option value="MH">Maharashtra</option>
+              </select>
+              
+              
+            </div> 
+            
+            
+            <div class="form-group text-center">
+              
+              <button id="update" type="submit" class="btn btn-blue btn-outline-primary">Update</button>
+              
+            </div>
+            
+          </form>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+<div class="container">
+  
+  <div class="modal fade" id="myModal1" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          
+          
+        </div>
+        <div class="modal-body">
+            
+          <h2 class="text-center" ><b>Change Password</b></h2>
+          
+          <hr>
+          
+          <div class="form-group">
+            
+            <input id="oldpassword" type="password" class="form-control" placeholder="Current Password" required="required">
+            
+          </div>
+          
+          <div class="form-group">
+            
+            <input id="newpassword" oninput="check()" type="password" class="form-control" placeholder="New Password" required="required">
+            
+          </div>
+          <p id="cmsg" style="display: none;">Old and New password cannot be same</p>
+          <div class="form-group text-center">
+            
+            <button id="changepassword"  disabled type="submit" class="btn btn-blue btn-outline-primary">Submit</button>
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      
+    </div>
+  </div>
+  
+</div>
+
+
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="js/popper.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/owl.carousel.min.js"></script>
+    <script src="js/jquery.sticky.js"></script>
+    <script src="js/jquery.waypoints.min.js"></script>
+    <script src="js/jquery.animateNumber.min.js"></script>
+    <script src="js/jquery.fancybox.min.js"></script>
+    <script src="js/jquery.easing.1.3.js"></script>
+    <script src="js/bootstrap-datepicker.min.js"></script>
+    <script src="js/aos.js"></script>
+
+    <script src="js/main.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+
+  </body>
+
+</html>
+

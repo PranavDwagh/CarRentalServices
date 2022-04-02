@@ -2,6 +2,8 @@ package com.carrentalservice.dao;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -54,7 +56,7 @@ public class DriverDAO {
 		driverRepo.save(obj);
 	}
 
-	public void assignDriver() {
+	public void assignDriver(HttpSession session) {
 
 		Driver driver = driverRepo.assignDriver();
 		
@@ -62,7 +64,7 @@ public class DriverDAO {
 		{
 			driver.setStatus(0);
 			driverRepo.save(driver);
-			session.map.put("driverId", driver.getId());          // TODO throw exception when no driver is availble
+			session.setAttribute("driverId", driver.getId());
 		}
 		
 	}

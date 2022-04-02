@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<%@page import="org.apache.tomcat.util.codec.binary.Base64"%>
 <%@page import="java.io.ByteArrayInputStream"%>
 <%@page import="javax.imageio.ImageIO"%>
 <%@page import="java.awt.image.BufferedImage"%>
 <%@page import="org.hibernate.internal.build.AllowSysOut"%>
-<%@page import="java.util.Base64"%>
 <%@page import="java.io.OutputStream"%>
 <%@page import="java.sql.Blob"%>
 <%@page import="java.util.List"%>
@@ -25,6 +25,19 @@
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@3.3.7/dist/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 <script>
+
+function showVehicleImage(vehicleId){
+	$(document).ready(()=>{
+		$.ajax({
+			url : "/vehicleController/getVehicleImage/"+vehicleId,
+			type : "GET",
+			success : function (vehicleImage){
+				console.log(vehicleImage);
+			}
+		})
+	})
+	
+}
 function deleteVehicle(vehicleId){
 	console.log(vehicleId);
 	var id = vehicleId;
@@ -38,7 +51,7 @@ function deleteVehicle(vehicleId){
 		}
 	})	
 } //end of function updateVehicle();
-function addCarDetails(){
+function addCar(){
 	var u = "/addCar/"+$("#vehicleName").val()+"/"+$("#vehicleBrandName").val()+"/"+$("#vehicleType").val()+"/"+$("#seatingCapacity").val()+"/"+$("#pricePerKm").val()+"/"+$("#vehicleFuelType").val()+"/"+$("#vehicleImage").val();
 	console.log(u);
 	$(document).ready(()=>{
@@ -144,28 +157,28 @@ function updateCarPrice(){
              	</tr>
              	<%for(Vehicle vehicle : vehicleList) {%>
 	           	<%
-          					Blob image = null;
+          					/* Blob image = null;
           					byte[] imgData = null;
           					image = vehicle.getVehicle_image();
-          					imgData = image.getBytes(0, (int)image.length());
+          					imgData = image.getBytes(1, (int)image.length());
           					BufferedImage img = ImageIO.read(new ByteArrayInputStream(imgData));
-          					 /* response.setContentType("image/jpeg");
-          					 OutputStream o = response.getOutputStream();
+          					response.setContentType("image/jpeg");
+          					OutputStream o = response.getOutputStream();
           					o.write(imgData);
           					o.flush();
           					o.close(); */
-	           			%>
-	           			
+	           	%>
              		<tr>		
-             		<td><img src = "<%=img %>" alt = "<%=vehicle.getVehicle_name()%>" st ></td>
-             		<td><%=vehicle.getVehicle_name() %></td>
-             		<td><%=vehicle.getVehicle_brand_name() %></td>
-             		<td><%=vehicle.getVehicle_type() %></td>
-             		<td><%=vehicle.getVehicle_seating_capacity() %></td>
-             		<td><%=vehicle.getVehicle_price_per_km()%></td>
-             		<td><%=vehicle.getVehicle_fuel_type() %></td>
-             		<td><button class = "btn btn-success" onclick = temp(<%=vehicle.getVehicle_id() %>) data-toggle = "modal" data-target="#updatePrice">Update Price</button>    <a href="http://localhost:8080/loadManageCars" class = "btn btn-danger" onclick = deleteVehicle(<%=vehicle.getVehicle_id() %>)>Delete</a></td>
-             	</tr>
+             			<img src="" id="image">
+	             		<td><button class = "btn btn-success" onclick = showVehicleImage(<%=vehicle.getVehicle_id() %>)>Show Image</button></td>
+	             		<td><%=vehicle.getVehicle_name() %></td>
+	             		<td><%=vehicle.getVehicle_brand_name() %></td>
+	             		<td><%=vehicle.getVehicle_type() %></td>
+	             		<td><%=vehicle.getVehicle_seating_capacity() %></td>
+	             		<td><%=vehicle.getVehicle_price_per_km()%></td>
+	             		<td><%=vehicle.getVehicle_fuel_type() %></td>
+	             		<td><button class = "btn btn-success" onclick = temp(<%=vehicle.getVehicle_id() %>) data-toggle = "modal" data-target="#updatePrice">Update Price</button>    <a href="http://localhost:8080/loadManageCars" class = "btn btn-danger" onclick = deleteVehicle(<%=vehicle.getVehicle_id() %>)>Delete</a></td>
+             		</tr>
              	<%} %>
              	
              </table>
@@ -222,7 +235,7 @@ function updateCarPrice(){
 	      					<input type="file" id="vehicleImage" accept="image/png, image/jpeg" name="vehicleImage">
     				</div>
     				<div class="modal-footer">
-      					<button type="submit" class="btn btn-primary" >Add Car</button>
+      					<button type="submit" class="btn btn-primary" onclick="addCar()">Add Car</button>
       					<button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
     				</div>
     				</form>

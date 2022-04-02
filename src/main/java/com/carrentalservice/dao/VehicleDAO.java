@@ -1,5 +1,7 @@
 package com.carrentalservice.dao;
 
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 
 import javax.servlet.http.HttpSession;
@@ -40,7 +42,7 @@ public class VehicleDAO {
 		if(vehicle!=null)
 		{
 			toogleVehicleState(vehicle.getVehicle_id());
-			driverDao.assignDriver();
+			driverDao.assignDriver(session);
 			Session.map.put("vehicleId", vehicle.getVehicle_id());
 			session.setAttribute("vehicleId", vehicle.getVehicle_id());
 		}
@@ -72,5 +74,13 @@ public class VehicleDAO {
 		return list;
 	}
 	
-	
+	public Blob getVehicleImage(int vehicleId) throws SQLException {
+		Blob image = vehicleRepo.getVehicleImage(vehicleId);
+		byte [] byteArr = image.getBytes(1, (int)image.length());
+		System.out.println(byteArr);
+		String s = new String (byteArr);
+		System.out.println(s);
+		System.out.println(image);
+		return image;
+	}
 }

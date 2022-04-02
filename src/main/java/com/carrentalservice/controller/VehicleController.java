@@ -1,7 +1,10 @@
 package com.carrentalservice.controller;
 
+import java.sql.Blob;
+import java.sql.SQLException;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,11 +21,21 @@ import com.carrentalservice.entity.Vehicle;
 
 
 @RestController
-@RequestMapping("vehicleController")
+@RequestMapping("vehicle")
 public class VehicleController {
 
 	@Autowired
 	VehicleDAO dao;
+
+	@Autowired
+	HttpServletRequest request;
+	
+	@GetMapping("/getAll")
+	public List<Vehicle> displayAllVehicle()
+	{
+		 List<Vehicle> list =dao.getAll();
+		 return list;
+	}
 	
 	@GetMapping("/getAllVehicles")
 	public List<Vehicle> getAllVehicles(Model model)
@@ -53,4 +66,9 @@ public class VehicleController {
 		List<Vehicle> list = dao.getAvailableVehicle();
 		return list;
 	}
+	
+	@GetMapping("/getVehicleImage/{vehicleId}")
+	public Blob getVehicleImage(@PathVariable int vehicleId) throws SQLException {
+		return dao.getVehicleImage(vehicleId);
+	} 
 }

@@ -27,7 +27,7 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.carrentalservice.AdminRepo;
-import com.carrentalservice.BookingRepo;
+import com.carrentalservice.BookingRepository;
 import com.carrentalservice.CustomerRepo;
 import com.carrentalservice.DriverRepo;
 import com.carrentalservice.VehicleRepo;
@@ -50,7 +50,7 @@ public class AdminController {
 	@Autowired
 	CustomerRepo customerRepo;
 	@Autowired
-	BookingRepo bookingRepo;
+	BookingRepository bookingRepo;
 	
 	@GetMapping("/")
 	public ModelAndView loadAdminLogin() {
@@ -88,25 +88,9 @@ public class AdminController {
 	public void updatePrice(@PathVariable int vehicleId, @PathVariable int updatedPrice) {
 		vehicleRepo.updatePrice(vehicleId, updatedPrice);
 	} // end of updatePrice
-
-	@PostMapping("/add")
-	public void add(@RequestBody Vehicle vehicle) {
-		byte[] byteArr;
-
-		vehicleRepo.save(vehicle);
-	}
-
-//	 @PostMapping("/addCar/{vehicleName}/{vehicleBrandName}/{vehicleType}/{seatingCapacity}/{pricePerKm}/{vehicleFuelType}/{vehicleImage}")
-//	  public void addCar(@PathVariable String vehicleName, @PathVariable String vehicleBrandName, @PathVariable String vehicleType, @PathVariable int seatingCapacity, @PathVariable int pricePerKm, @PathVariable String vehicleFuelType, @PathVariable MultipartFile vehicleImage) throws IOException, SerialException, SQLException 
-//	 { 
-//		String fileName = StringUtils.cleanPath(vehicleImage.getOriginalFilename());
-//	    Vehicle vehicle = new Vehicle(vehicleName, vehicleBrandName, vehicleType, seatingCapacity, pricePerKm, vehicleFuelType, Base64.getEncoder().encodeToString(vehicleImage.getBytes()));
-//	    vehicleRepo.save(vehicle); 
-//	 } //end of addCar;
 	 
-	
 	 @PostMapping("/addCar") 
-	 public void addCar(@RequestParam("vehicleName")
+	 public String addCar(@RequestParam("vehicleName")
 	 String vehicleName, @RequestParam("vehicleBrandName") String
 	 vehicleBrandName, @RequestParam("vehicleType") String
 	 vehicleType, @RequestParam("seatingCapacity") int
@@ -122,7 +106,9 @@ public class AdminController {
 	 System.out.println(vehicleName + vehicleBrandName + vehicleType + seatingCapacity + pricePerKm + vehicleFuelType + Base64.getEncoder().encodeToString(vehicleImage.getBytes())); String fileName = StringUtils.cleanPath(vehicleImage.getOriginalFilename()); 
 	 Vehicle vehicle= new Vehicle(vehicleName, vehicleBrandName, vehicleType, seatingCapacity, pricePerKm, vehicleFuelType, blob);
 	 System.out.println(vehicle); 
-	 vehicleRepo.save(vehicle); } //end of addCar;
+	 vehicleRepo.save(vehicle); 
+	 return "Admin/ManageCars";
+	 } //end of addCar;
 	 	
 	@PostMapping("/addDriver/{driverFirstName}/{driverLastName}/{driverContactNumber}/{driverAvail}/{driverLicenseNumber}/{driverCity}/{driverPinCode}/{driverState}")
 	public void addDriver(@PathVariable String driverFirstName, @PathVariable String driverLastName,

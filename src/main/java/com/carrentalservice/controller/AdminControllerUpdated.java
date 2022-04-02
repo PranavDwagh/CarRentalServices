@@ -34,6 +34,7 @@ public class AdminControllerUpdated {
 		return status;
 	}
 	
+	
 	@GetMapping("/getAdminName")
 	public String getAdminName() {
 		String adminName = dao.getAdminName(request.getSession());
