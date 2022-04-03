@@ -30,6 +30,8 @@ import com.carrentalservice.AdminRepo;
 import com.carrentalservice.BookingRepository;
 import com.carrentalservice.CustomerRepo;
 import com.carrentalservice.DriverRepo;
+import com.carrentalservice.FeedbackRepository;
+import com.carrentalservice.PaymentRepository;
 import com.carrentalservice.VehicleRepo;
 import com.carrentalservice.entity.Admin;
 import com.carrentalservice.entity.Booking;
@@ -51,6 +53,10 @@ public class AdminController {
 	CustomerRepo customerRepo;
 	@Autowired
 	BookingRepository bookingRepo;
+	@Autowired
+	FeedbackRepository feedbackRepo;
+	@Autowired
+	PaymentRepository paymentRepo;
 	
 	@GetMapping("/")
 	public ModelAndView loadAdminLogin() {
@@ -67,14 +73,18 @@ public class AdminController {
 	@GetMapping("/loadAdminDashboard")
 	public ModelAndView loadAdminDashboard() {
 		ModelAndView adminModelAndView = new ModelAndView();
+		adminModelAndView.addObject("amount", paymentRepo.getTotalAmount());
 		adminModelAndView.addObject("carsCount", vehicleRepo.getCarsCount());
+		adminModelAndView.addObject("availCount", vehicleRepo.getAvailCars());
+		adminModelAndView.addObject("reservedCount", vehicleRepo.getReservedCars());
 		adminModelAndView.addObject("driversCount", driverRepo.getDriverCount());
+		adminModelAndView.addObject("driversAvailCount", driverRepo.getAvailDrivers());
+		adminModelAndView.addObject("driversReservedCount", driverRepo.getReservedDrivers());
 		adminModelAndView.addObject("customersCount", customerRepo.getCustomerCount());
 		adminModelAndView.setViewName("Admin/Admin_Dashboard");
 		return adminModelAndView;
 	} // end of
 
-	
 	
 	@PostMapping("/addAdmin/{adminFirstName}/{adminLastName}/{adminContactNumber}/{adminUserName}/{adminPassword}")
 	public void addAdmin(@PathVariable String adminFirstName, @PathVariable String adminLastName,
@@ -153,15 +163,29 @@ public class AdminController {
 	} // end of loadManageDrivers;
 
 	@GetMapping("/loadUserFeedback")
-	public String loadUserFeedback() {
-		return "UserFeedback";
+	public ModelAndView loadUserFeedback() {
+		ModelAndView obj = new ModelAndView();
+		obj.addObject("viewFeedback",feedbackRepo.getFeedback());
+		obj.setViewName("Admin/UserFeedback");
+		return obj;
 	} // end of loadUserFeedback
 
 	@GetMapping("/loadViewBookings")
-	public String loadViewBookings() {
-		return "Admin/ViewBookings";
+	public ModelAndView loadViewBookings() {
+		ModelAndView obj = new ModelAndView();
+		obj.addObject("viewBooking",bookingRepo.getActiveBookings());
+		obj.setViewName("Admin/ViewBookings");
+		return obj;
 	} // end of loadUserFeedback
 
+	@GetMapping("/loadAllBookings")
+	public ModelAndView loadAllBookings() {
+		ModelAndView obj = new ModelAndView();
+		obj.addObject("viewBooking",bookingRepo.getAllBookings());
+		obj.setViewName("Admin/ViewBookings");
+		return obj;
+	} // end of loadUserFeedback
+	
 	@GetMapping("/loadViewCustomers")
 	public ModelAndView loadViewCustomers() {
 		ModelAndView customersModelAndView = new ModelAndView();
@@ -171,8 +195,11 @@ public class AdminController {
 	} // end of loadUserFeedback
 
 	@GetMapping("/loadViewPayments")
-	public String loadViewPayments() {
-		return "/Admin/ViewPayment";
+	public ModelAndView loadViewPayments() {
+		ModelAndView obj = new ModelAndView();
+		obj.addObject("viewPayment",paymentRepo.getPaymentDetails());
+		obj.setViewName("Admin/ViewPayment");
+		return obj;
 	} // end of loadUserFeedback
 
 	@GetMapping("/loadViewProfile")

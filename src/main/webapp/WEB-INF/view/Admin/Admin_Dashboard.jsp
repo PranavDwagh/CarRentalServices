@@ -116,7 +116,14 @@
     <section class="home-section">
     <% int carsCount = (int)request.getAttribute("carsCount"); 
        int driversCount = (int) request.getAttribute("driversCount");
-       int customersCount = (int) request.getAttribute("customersCount");%>
+       int customersCount = (int) request.getAttribute("customersCount");
+       int payment = (int) request.getAttribute("amount");
+       int driverAvail = (int)request.getAttribute("driversAvailCount");
+       int driverReserved = (int)request.getAttribute("driversReservedCount");
+       int availCount = (int)request.getAttribute("availCount");
+       int reservedCount = (int)request.getAttribute("reservedCount");
+       %>
+       
         <nav>
             <div class="profile-details">
                 <!--<img src="images/profile.jpg" alt="">-->
@@ -156,10 +163,11 @@
                     </div>
                     <i class='bx bx-cart-alt cart'></i>
                 </div>
+                
                 <div class="box">
                     <div class="right-side">
                         <div class="box-topic">Payment</div>
-                        <div class="number">1900</div>
+                        <div class="number"><%=payment %></div>
                     </div>
                     <i class='bx bxs-cart-add cart two'></i>
                 </div>
@@ -184,184 +192,47 @@
                     </div>
                     <i class='bx bxs-cart-download cart four'></i>
                 </div>
+                
+                <div class="box" style="margin-top:20px;">
+                    <div class="right-side">
+                        <div class="box-topic">Available Drivers</div>
+                        <div class="number" id = "driversCount"><%=driverAvail %></div>
+                        <!-- <div class="indicator">
+              <i class='bx bx-down-arrow-alt down'></i>
+              <span class="text">Down From Today</span>
+            </div> -->
+                    </div>
+                    <i class='bx bxs-cart-download cart four'></i>
+                </div>
+                <div class="box" style="margin-right:%;">
+                    <div class="right-side">
+                        <div class="box-topic">Available Cars</div>
+                        <div class="number" id = "driversCount"><%=availCount %></div>
+                    </div>
+                    <i class='bx bxs-cart-download cart four'></i>
+                </div>
+                <div class="box" style="margin-right:%;">
+                    <div class="right-side">
+                        <div class="box-topic">Reserved Cars</div>
+                        <div class="number" id = "driversCount"><%=reservedCount %></div>
+                    </div>
+                    <i class='bx bxs-cart-download cart four'></i>
+                </div>
+                
+                <div class="box" style="margin-right:%;">
+                    <div class="right-side">
+                        <div class="box-topic">Reserved Drivers</div>
+                        <div class="number" id = "driversCount"><%=driverReserved %></div>
+                    </div>
+                    <i class='bx bxs-cart-download cart four'></i>
+                </div>
+                
+                
+                
+                
+                
             </div>
 
-            <div class="sales-boxes">
-                <div class="recent-sales box">
-                    <div class="title">Recent Bookings</div>
-                    <div class="sales-details">
-                        <ul class="details">
-                            <li class="topic">Date</li>
-                            <li>
-                                <p>03 Jan 2022</p>
-                            </li>
-                            <li>
-                                <p>03 Jan 2022</p>
-                            </li>
-                            <li>
-                                <p>03 Jan 2022</p>
-                            </li>
-                            <li>
-                                <p>03 Jan 2022</p>
-                            </li>
-                            <li>
-                                <p>03 Jan 2022</p>
-                            </li>
-                            <li>
-                                <p>03 Jan 2022</p>
-                            </li>
-                            <li>
-                                <p>03 Jan 2022</p>
-                            </li>
-                            <li>
-                                <p>03 Jan 2022</p>
-                            </li>
-                            <li>
-                                <p>03 Jan 2022</p>
-                            </li>
-                            <li>
-                                <p>03 Jan 2022</p>
-                            </li>
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Customer</li>
-                            <li>
-                                <p>CustomerName</p>
-                            </li>
-                            <li>
-                                <p>CustomerName</p>
-                            </li>
-                            <li>
-                                <p>CustomerName</p>
-                            </li>
-                            <li>
-                                <p>CustomerName</p>
-                            </li>
-                            <li>
-                                <p>CustomerName</p>
-                            </li>
-                            <li>
-                                <p>CustomerName</p>
-                            </li>
-                            <li>
-                                <p>CustomerName</p>
-                            </li>
-                            <li>
-                                <p>CustomerName</p>
-                            </li>
-                            <li>
-                                <p>CustomerName</p>
-                            </li>
-                            <li>
-                                <p>CustomerName</p>
-                            </li>
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Source</li>
-                            <li>
-                                <p>Source</p>
-                            </li>
-                            <li>
-                                <p>Source</p>
-                            </li>
-                            <li>
-                                <p>Source</p>
-                            </li>
-                            <li>
-                                <p>Source</p>
-                            </li>
-                            <li>
-                                <p>Source</p>
-                            </li>
-                            <li>
-                                <p>Source</p>
-                            </li>
-                            <li>
-                                <p>Source</p>
-                            </li>
-                            <li>
-                                <p>Source</p>
-                            </li>
-                            <li>
-                                <p>Source</p>
-                            </li>
-                            <li>
-                                <p>Source</p>
-                            </li>
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Destination</li>
-                            <li>
-                                <p>Destination</p>
-                            </li>
-                            <li>
-                                <p>Destination</p>
-                            </li>
-                            <li>
-                                <p>Destination</p>
-                            </li>
-                            <li>
-                                <p>Destination</p>
-                            </li>
-                            <li>
-                                <p>Destination</p>
-                            </li>
-                            <li>
-                                <p>Destination</p>
-                            </li>
-                            <li>
-                                <p>Destination</p>
-                            </li>
-                            <li>
-                                <p>Destination</p>
-                            </li>
-                            <li>
-                                <p>Destination</p>
-                            </li>
-                            <li>
-                                <p>Destination</p>
-                            </li>
-
-                        </ul>
-                        <ul class="details">
-                            <li class="topic">Total Fair</li>
-                            <li>
-                                <p>Total Fair</p>
-                            </li>
-                            <li>
-                                <p>Total Fair</p>
-                            </li>
-                            <li>
-                                <p>Total Fair</p>
-                            </li>
-                            <li>
-                                <p>Total Fair</p>
-                            </li>
-                            <li>
-                                <p>Total Fair</p>
-                            </li>
-                            <li>
-                                <p>Total Fair</p>
-                            </li>
-                            <li>
-                                <p>Total Fair</p>
-                            </li>
-                            <li>
-                                <p>Total Fair</p>
-                            </li>
-                            <li>
-                                <p>Total Fair</p>
-                            </li>
-                            <li>
-                                <p>Total Fair</p>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="button">
-                        <a href="#">See All Bookings</a>
-                    </div>
-                    <br>
-                </div>
     </section>
     <!-- 
     <script>

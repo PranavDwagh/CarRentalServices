@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<%@page import="com.carrentalservice.DTO.IPaymentDTO"%>
+<%@page import="java.util.List"%>
 <html lang="en" dir="ltr">
 
 <head>
@@ -80,66 +82,27 @@
     <section class="home-section">
         <div class = "container text-center">
             <h3>Payments</h3>
-            <table class = "table table-striped"> 
+            <table class = "table table-bordered"> 
                 <thead class = "">
                     <tr>
-                        <th scope="">Id</th>
                         <th scope="">Customer Name</th>
                         <th scope="col">Vehicle Name</th>
-                        <th scope="col">Price /km</th>
                         <th scope="col">Amount</th>
-                        <th scope="col">Journey Date/Time</th>
                         <th scope="col">Payment Date/Time</th>
-                        <th scope="col">Source</th>
-                        <th scope="col">Destination</th>
                         <th scope = "col"><button type = "button" class = "btn btn-warning">Refresh</button></th>
                     </tr>
-                </thead>
-                <tbody>
+                    <%List<IPaymentDTO> list = (List<IPaymentDTO>)request.getAttribute("viewPayment"); 
+                    for(IPaymentDTO data : list){%>
                     <tr>
-                        <th scope = "row">1</th>
-                        <th scope = "row">Kalpit Vyas</th>
-                        <th scope = "row">Verna</th>
-                        <th scope = "row">20</th>
-                        <th scope = "row">1900</th>
-                        <th scope = "row">03/03/2022 11:00:00AM</th>
-                        <th scope = "row">28/02/2022 09:00:00AM</th>
-                        <th scope="col">Pune</th>
-                        <th scope="col">Mumbai</th>
+                        
+                        <th scope = "row"><%=data.getCustomerName() %></th>
+                       
+                        <th scope = "row"><%=data.getVehicleName() %></th>
+                         <th scope = "row"><%=data.getAmount() %></th>
+                        <th scope = "row"><%=data.getJourneyDateandTime() %></th>
                     </tr>
-                    <tr>
-                        <th scope = "row">2</th>
-                        <th scope = "row">Kalpit Vyas</th>
-                        <th scope = "row">Verna</th>
-                        <th scope = "row">20</th>
-                        <th scope = "row">1900</th>
-                        <th scope = "row">03/03/2022 11:00:00AM</th>
-                        <th scope = "row">28/02/2022 09:00:00AM</th>
-                        <th scope="col">Pune</th>
-                        <th scope="col">Mumbai</th>
-                    </tr>
-                    <tr>
-                        <th scope = "row">3</th>
-                        <th scope = "row">Kalpit Vyas</th>
-                        <th scope = "row">Verna</th>
-                        <th scope = "row">20</th>
-                        <th scope = "row">1900</th>
-                        <th scope = "row">03/03/2022 11:00:00AM</th>
-                        <th scope = "row">28/02/2022 09:00:00AM</th>
-                        <th scope="col">Pune</th>
-                        <th scope="col">Mumbai</th>
-                    </tr>
-                    <tr>
-                        <th scope = "row">4</th>
-                        <th scope = "row">Kalpit Vyas</th>
-                        <th scope = "row">Verna</th>
-                        <th scope = "row">20</th>
-                        <th scope = "row">1900</th>
-                        <th scope = "row">03/03/2022 11:00:00AM</th>
-                        <th scope = "row">28/02/2022 09:00:00AM</th>
-                        <th scope="col">Pune</th>
-                        <th scope="col">Mumbai</th>
-                    </tr>
+                    <%} %>
+                   
                 </tbody>
             </table>
         </div>

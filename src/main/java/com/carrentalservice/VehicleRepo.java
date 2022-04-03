@@ -30,4 +30,14 @@ public interface VehicleRepo extends JpaRepository<Vehicle, Integer>{
 	
 	@Query(value="select vehicle_price_per_km from vehicle where vehicle_id =:id ", nativeQuery = true)
 	public int getRate(@Param("id")int id);
+	
+	@Query(value = "SELECT COUNT(*) FROM vehicle where vehicle_status=1", nativeQuery=true)
+	public int getAvailCars();
+	
+	@Query(value = "SELECT COUNT(*) FROM vehicle where vehicle_status=0", nativeQuery=true)
+	public int getReservedCars();
+	
+	@Query(value = "select * from vehicle where vehicle_id = :id ", nativeQuery = true)
+	public Vehicle getByStatus(@Param("id") int id);
+	
 }

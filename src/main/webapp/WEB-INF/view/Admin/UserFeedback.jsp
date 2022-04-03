@@ -1,5 +1,7 @@
 <!DOCTYPE html>
 <!-- Designined by CodingLab | www.youtube.com/codinglabyt -->
+<%@page import="com.carrentalservice.DTO.IFeedbackDTO"%>
+<%@page import="java.util.List"%>
 <html lang="en" dir="ltr">
 
 <head>
@@ -83,62 +85,24 @@
         
         <div class = "container text-center">
             <h3>User Feedback</h3>
-            <table class = "table table-striped"> 
+            <table class = "table table-bordered"> 
                 <thead class = "">
                     <tr>
-                        <th scope="">Feedback Id</th>
+                       
                         <th scope="">Customer Name</th>
-                        <th scope="col">Journey Date and Time</th>
-                        <th scope="col">Source</th>
-                        <th scope="col">Destination</th>
-                        <th scope="col">Amount</th>
                         <th scope="col">Rating</th>
                         <th scope="col">Description</th>
                         <th scope = "col"><button type = "button" class = "btn btn-warning">Refresh</button></th>
                     </tr>
-                </thead>
-                <tbody>
+                    <% List<IFeedbackDTO> list = (List<IFeedbackDTO>) request.getAttribute("viewFeedback"); 
+                    	for(IFeedbackDTO feedback : list){
+                    %>
                     <tr>
-                        <th scope = "row">1</th>
-                        <th scope = "row">Kalpit Vyas</th>
-                        <th scope = "row">28/02/2022 11:00:00 AM</th>
-                        <th scope = "row">Pune</th>
-                        <th scope = "row">Mumbai</th>
-                        <th scope = "row">1900</th>
-                        <th scope = "row">4</th>
-                        <th scope="col">N/A</th>
+                        <th scope = "row"><%=feedback.getFirstName() %></th>
+                        <th scope = "row"><%=feedback.getRating() %></th>
+                        <th scope = "row"><%=feedback.getFeedback() %></th>
                     </tr>
-                    <tr>
-                        <th scope = "row">2</th>
-                        <th scope = "row">Pranav Wagh</th>
-                        <th scope = "row">28/02/2022 11:00:00 AM</th>
-                        <th scope = "row">Pune</th>
-                        <th scope = "row">Mumbai</th>
-                        <th scope = "row">1900</th>
-                        <th scope = "row">4</th>
-                        <th scope="col">N/A</th>
-                    </tr>
-                    <tr>
-                        <th scope = "row">3</th>
-                        <th scope = "row">Rahul Baghel</th>
-                        <th scope = "row">28/02/2022 11:00:00 AM</th>
-                        <th scope = "row">Pune</th>
-                        <th scope = "row">Mumbai</th>
-                        <th scope = "row">1900</th>
-                        <th scope = "row">4</th>
-                        <th scope="col">N/A</th>
-                    </tr>
-                    <tr>
-                        <th scope = "row">4</th>
-                        <th scope = "row">Kalpit Vyas</th>
-                        <th scope = "row">01/03/2022 08:00:00 AM</th>
-                        <th scope = "row">Mumbai</th>
-                        <th scope = "row">Pune</th>
-                        <th scope = "row">2600</th>
-                        <th scope = "row">3</th>
-                        <th scope="col">N/A</th>
-                    </tr>
-                </tbody>
+                   <%} %>
             </table>
         </div>
     </section>

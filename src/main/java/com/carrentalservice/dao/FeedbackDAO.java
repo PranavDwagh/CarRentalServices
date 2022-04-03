@@ -40,9 +40,9 @@ public class FeedbackDAO {
 
 	public List<IFeedbackDTO> getFeedbackCustomerId(HttpSession session) {
 //		List<Feedback> feedback = feedbackRepo.findByCustomerId(id);
-		int customerId = (int) session.getAttribute("currentCustomer");
-		int bookingId = (int) session.getAttribute("feedbackBookingId");
-		List<IFeedbackDTO> feedback = feedbackRepo.getFeedback(customerId, bookingId);
+//		int customerId = (int) session.getAttribute("currentCustomer");
+//		int bookingId = (int) session.getAttribute("feedbackBookingId");
+		List<IFeedbackDTO> feedback = feedbackRepo.getFeedback(/*customerId, bookingId*/);
 		return feedback;
 	}
 

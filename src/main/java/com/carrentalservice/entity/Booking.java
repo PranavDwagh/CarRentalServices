@@ -5,134 +5,133 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToOne;
 
 @Entity(name="booking")
 public class Booking {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name="ongoing_id")
-	private int id;
-	@Column(name="customer_id")
-	private int customerId;
-	@Column(name="vehicle_id")
-	private int vehicleId;
-	@Column(name="driver_id")
-	private int driverId;
-	@Column(name="payment_id")
-	private int paymentId;
-	@Column(name="booking_time",columnDefinition="varchar(50) default (curtime())")
-	private String bookingTime;
-	@Column(name="booking_date",columnDefinition="varchar(50) default (curdate())")
-	private String bookingDate;
-	@Column(name="journey_time")
-	private String journeyTime;
-	@Column(name="journey_date")
-	private String journeyDate;
-	/*
-	 * @Column(name="Total_ride_price") private int totalPrice;
-	 */         // to be removed from database
-	@Column(name="source")
+	@Column
+	private int ongoing_id;
+	@Column
+	private int customer_id;
+	@Column
+	private int vehicle_id;
+	@Column
+	private int driver_id;
+	@Column
+	private int payment_id;
+	@Column
+	private String booking_time;
+	@Column
+	private String booking_date;
+	@Column
+	private String journey_time;
+	@Column
+	private String journey_date;
+	
+	@Column
 	private String source;
-	@Column(name="destination")
+	@Column
 	private String destination;
-	@Column(name="ride_status", columnDefinition="int default 1")
-	private int rideStatus;
+	@Column
+	private int ride_status;
 	
 	public Booking() {
 		// TODO Auto-generated constructor stub
 	}
+
+	public Booking(int ongoing_id, int customer_id, int vehicle_id, int driver_id, int payment_id, String booking_time,
+			String booking_date, String journey_time, String journey_date, int total_ride_price, String source,
+			String destination, int ride_status) {
+		super();
+		this.ongoing_id = ongoing_id;
+		this.customer_id = customer_id;
+		this.vehicle_id = vehicle_id;
+		this.driver_id = driver_id;
+		this.payment_id = payment_id;
+		this.booking_time = booking_time;
+		this.booking_date = booking_date;
+		this.journey_time = journey_time;
+		this.journey_date = journey_date;
 	
-	public Booking(int id, int customerId, int vehicleId, int driverId, int paymentId, String bookingTime,
-			String bookingDate, String journeyTime, String journeyDate, String source,
-			String destination, int rideStatus) {
-	
-		this.id = id;
-		this.customerId = customerId;
-		this.vehicleId = vehicleId;
-		this.driverId = driverId;
-		this.paymentId = paymentId;
-		this.bookingTime = bookingTime;
-		this.bookingDate = bookingDate;
-		this.journeyTime = journeyTime;
-		this.journeyDate = journeyDate;
 		this.source = source;
 		this.destination = destination;
-		this.rideStatus = rideStatus;
+		this.ride_status = ride_status;
 	}
 
-	public int getPaymentId() {
-		return paymentId;
+	public int getOngoing_id() {
+		return ongoing_id;
 	}
 
-	public void setPaymentId(int paymentId) {
-		this.paymentId = paymentId;
+	public void setOngoing_id(int ongoing_id) {
+		this.ongoing_id = ongoing_id;
 	}
 
-	public int getId() {
-		return id;
+	public int getCustomer_id() {
+		return customer_id;
 	}
 
-	public void setId(int id) {
-		this.id = id;
+	public void setCustomer_id(int customer_id) {
+		this.customer_id = customer_id;
 	}
 
-	public int getCustomerId() {
-		return customerId;
+	public int getVehicle_id() {
+		return vehicle_id;
 	}
 
-	public void setCustomerId(int customerId) {
-		this.customerId = customerId;
+	public void setVehicle_id(int vehicle_id) {
+		this.vehicle_id = vehicle_id;
 	}
 
-	public int getVehicleId() {
-		return vehicleId;
+	public int getDriver_id() {
+		return driver_id;
 	}
 
-	public void setVehicleId(int vehicleId) {
-		this.vehicleId = vehicleId;
+	public void setDriver_id(int driver_id) {
+		this.driver_id = driver_id;
 	}
 
-	public int getDriverId() {
-		return driverId;
+	public int getPayment_id() {
+		return payment_id;
 	}
 
-	public void setDriverId(int driverId) {
-		this.driverId = driverId;
+	public void setPayment_id(int payment_id) {
+		this.payment_id = payment_id;
 	}
 
-	public String getBookingTime() {
-		return bookingTime;
+	public String getBooking_time() {
+		return booking_time;
 	}
 
-	public void setBookingTime(String bookingTime) {
-		this.bookingTime = bookingTime;
+	public void setBooking_time(String booking_time) {
+		this.booking_time = booking_time;
 	}
 
-	public String getBookingDate() {
-		return bookingDate;
+	public String getBooking_date() {
+		return booking_date;
 	}
 
-	public void setBookingDate(String bookingDate) {
-		this.bookingDate = bookingDate;
+	public void setBooking_date(String booking_date) {
+		this.booking_date = booking_date;
 	}
 
-	public String getJourneyTime() {
-		return journeyTime;
+	public String getJourney_time() {
+		return journey_time;
 	}
 
-	public void setJourneyTime(String journeyTime) {
-		this.journeyTime = journeyTime;
+	public void setJourney_time(String journey_time) {
+		this.journey_time = journey_time;
 	}
 
-	public String getJourneyDate() {
-		return journeyDate;
+	public String getJourney_date() {
+		return journey_date;
 	}
 
-	public void setJourneyDate(String journeyDate) {
-		this.journeyDate = journeyDate;
+	public void setJourney_date(String journey_date) {
+		this.journey_date = journey_date;
 	}
+
 
 	public String getSource() {
 		return source;
@@ -150,23 +149,13 @@ public class Booking {
 		this.destination = destination;
 	}
 
-	public int getRideStatus() {
-		return rideStatus;
+	public int getRide_status() {
+		return ride_status;
 	}
 
-	public void setRideStatus(int rideStatus) {
-		this.rideStatus = rideStatus;
+	public void setRide_status(int ride_status) {
+		this.ride_status = ride_status;
 	}
-
-	@Override
-	public String toString() {
-		return "Booking [id=" + id + ", customerId=" + customerId + ", vehicleId=" + vehicleId + ", driverId="
-				+ driverId + ", paymentId=" + paymentId + ", bookingTime=" + bookingTime + ", bookingDate="
-				+ bookingDate + ", journeyTime=" + journeyTime + ", journeyDate=" + journeyDate + 
-				", source=" + source + ", destination=" + destination + ", rideStatus=" + rideStatus
-				+ "]";
-	}
-
 	
 	
 }

@@ -31,25 +31,25 @@ public class BookingDAO {
 		System.out.println(time.format(now));
 	
 		Booking booking = new Booking();
-		booking.setJourneyTime((String)session.getAttribute("journeyTime"));
-		booking.setJourneyDate((String)session.getAttribute("journeyDate"));
+		booking.setJourney_time((String)session.getAttribute("journeyTime"));
+		booking.setJourney_date((String)session.getAttribute("journeyDate"));
 		booking.setSource((String)session.getAttribute("source"));
 		booking.setDestination((String)session.getAttribute("destination"));
 //		booking.setTotalPrice(intAmount);         // to be removed
-		booking.setRideStatus(1);
+		booking.setRide_status(1);
 
-		booking.setCustomerId((int)session.getAttribute("currentCustomer"));
-		booking.setVehicleId((int)session.getAttribute("vehicleId"));
-		booking.setDriverId((int)session.getAttribute("driverId"));
-		booking.setPaymentId((int)session.getAttribute("paymentId"));
+		booking.setCustomer_id((int)session.getAttribute("currentCustomer"));
+		booking.setVehicle_id((int)session.getAttribute("vehicleId"));
+		booking.setDriver_id((int)session.getAttribute("driverId"));
+		booking.setPayment_id((int)session.getAttribute("paymentId"));
 		
-		booking.setBookingDate(dt.format(now));
-		booking.setBookingTime(time.format(now));
+		booking.setBooking_date(dt.format(now));
+		booking.setBooking_time(time.format(now));
 
 
 		Booking newObj = bookingRepo.save(booking);
 		//Session.map.put("bookingId", newObj.getId());
-		session.setAttribute("bookingId", newObj.getId());
+		session.setAttribute("bookingId", newObj.getOngoing_id());
 		System.out.println(newObj);
 	}
 	
